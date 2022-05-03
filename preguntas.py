@@ -28,10 +28,10 @@ def pregunta_01():
     print(X.shape)
 
     # Transforme `y` a un array de numpy usando reshape
-    y_reshaped = y.reshape(-1,1)
+    y_reshaped = y.reshape(-1, 1)
 
     # Trasforme `X` a un array de numpy usando reshape
-    X_reshaped = X.reshape(-1,1)
+    X_reshaped = X.reshape(-1, 1)
 
     # Imprima las nuevas dimensiones de `y`
     print(y_reshaped.shape)
@@ -65,7 +65,6 @@ def pregunta_02():
     print(round(np.corrcoef(df['GDP'],df['life'])[0][1],4))
 
 
-
 def pregunta_03():
     """
     Entrenamiento del modelo sobre todo el conjunto de datos.
@@ -76,20 +75,24 @@ def pregunta_03():
     df = pd.read_csv('gm_2008_region.csv')
 
     # Asigne a la variable los valores de la columna `fertility`
-    X_fertility = np.array(df['fertility']).reshape(-1,1)
+    X_fertility = np.array(df['fertility'].reshape(-1,1))
+
     # Asigne a la variable los valores de la columna `life`
-    y_life = np.array(df['life']).reshape(-1,1)
+    y_life = np.array(df['life'].reshape(-1,1))
+
     # Importe LinearRegression
     from sklearn.linear_model import LinearRegression
 
     # Cree una instancia del modelo de regresión lineal
     reg = LinearRegression()
+
     # Cree El espacio de predicción. Esto es, use linspace para crear
     # un vector con valores entre el máximo y el mínimo de X_fertility
     prediction_space = np.linspace(
         max(X_fertility),
         min(X_fertility)
     ).reshape(-1,1)
+
     # Entrene el modelo usando X_fertility y y_life
     reg.fit(X_fertility, y_life)
 
@@ -117,9 +120,10 @@ def pregunta_04():
     df = pd.read_csv('gm_2008_region.csv')
 
     # Asigne a la variable los valores de la columna `fertility`
-    X_fertility = np.array(df['fertility']).reshape(-1,1)
+    X_fertility = np.array(df['fertility'].reshape(-1,1))
+
     # Asigne a la variable los valores de la columna `life`
-    y_life = np.array(df['life']).reshape(-1,1)
+    y_life = np.array(df['life'].reshape(-1,1))
 
     # Divida los datos de entrenamiento y prueba. La semilla del generador de números
     # aleatorios es 53. El tamaño de la muestra de entrenamiento es del 80%
@@ -134,11 +138,12 @@ def pregunta_04():
     linearRegression = LinearRegression()
 
     # Entrene el clasificador usando X_train y y_train
-    linearRegression.fit(X_train, y_train)
+    LinearRegression.fit(X_train, y_train)
 
     # Pronostique y_test usando X_test
     y_pred = linearRegression.predict(X_test)
+
     # Compute and print R^2 and RMSE
     print("R^2: {:6.4f}".format(linearRegression.score(X_test, y_test)))
-    rmse = np.sqrt(mean_squared_error(y_test,y_pred))
+    rmse = np.sqrt(mean_squared_error(y_test, y_life))
     print("Root Mean Squared Error: {:6.4f}".format(rmse))
